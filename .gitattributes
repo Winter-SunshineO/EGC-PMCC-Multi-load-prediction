@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# The data checksums cover the original bytes, including CSV line endings.
+data/** -text

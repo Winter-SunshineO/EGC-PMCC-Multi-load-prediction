@@ -1,0 +1,11 @@
+{
+  "recipe_version": "public-reviewer-recipe-5.0",
+  "data": "data/preprocessed_forecasting_v7/dataset_input.csv",
+  "point_path": {
+    "24": "p0",
+    "48": "p0",
+    "72": "p2a",
+    "96": "p2b"
+  },
+  "calibration_scale": 1.25
+}

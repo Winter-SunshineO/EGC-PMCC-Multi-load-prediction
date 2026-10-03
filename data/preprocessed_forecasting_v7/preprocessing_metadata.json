@@ -1,0 +1,1760 @@
+{
+  "schema_version": 7,
+  "protocol": "model_input_v7_hard_validity_robust_target_envelope",
+  "created_utc": "2026-09-17T08:37:29.639227+00:00",
+  "generation": {
+    "command": [
+      "python",
+      "scripts/preprocess_forecasting_data.py",
+      "--input",
+      "data/merged_data21-23.csv",
+      "--output-dir",
+      "data/preprocessed_forecasting_v7",
+      "--schema-version",
+      "7",
+      "--target-envelope-factor",
+      "10",
+      "--target-envelope-floor",
+      "1.0"
+    ],
+    "working_directory": "",
+    "script": "scripts/preprocess_forecasting_data.py",
+    "script_sha256": "e928d3d05ba722913974621dbb191ca848fdd24d9764e4ccf2eecdb00a46eaa0",
+    "python_version": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "numpy_version": "2.4.4",
+    "pandas_version": "3.0.2",
+    "publication": "staged_then_atomic_directory_rename"
+  },
+  "input": "data/merged_data21-23.csv",
+  "input_relative": "data/merged_data21-23.csv",
+  "input_sha256": "9087440df5be7eb145e36477dda3f69927a4f3d1dc91a322617ff5db0aaf2481",
+  "output_dataset": "dataset_input.csv",
+  "output_dataset_sha256": "6ff2f3bd18b32356f25aa1e3b5d29a7094ec6c7d7936474ebac628d116da2e91",
+  "label_dataset": "dataset_labels.csv",
+  "label_dataset_sha256": "4a22da20ab27d245de74572ebc47851d7b73d4d00cd9f02ed51bdf5b43599181",
+  "label_valid_mask": "label_valid_mask.csv",
+  "label_valid_mask_sha256": "748999f5bd580a8b38f217c791c63aedfec4c74d8c6f3b5c0a9cafe4a6e45051",
+  "raw_rows": 26264,
+  "aligned_rows": 26280,
+  "time_start": "2021-01-01 00:00:00",
+  "time_end": "2023-12-31 23:00:00",
+  "time_audit": {
+    "duplicate_timestamps": 0,
+    "inserted_missing_hours": 16
+  },
+  "split": {
+    "train_ratio": 0.8,
+    "validation_ratio": 0.1,
+    "test_ratio": 0.09999999999999995,
+    "train_end_exclusive": 21024,
+    "validation_end_exclusive": 23652,
+    "counts": {
+      "train": 21024,
+      "validation": 2628,
+      "test": 2628
+    }
+  },
+  "targets": [
+    "KW",
+    "CHWTON",
+    "HTmmBTU"
+  ],
+  "target_units": {
+    "KW": "kW",
+    "CHWTON": "kW",
+    "HTmmBTU": "kW"
+  },
+  "candidate_features": [
+    "DOW",
+    "Temperature",
+    "Dew Point",
+    "Relative Humidity",
+    "Solar Zenith Angle",
+    "Surface Albedo",
+    "Pressure",
+    "Precipitable Water",
+    "Wind Direction",
+    "Wind Speed",
+    "GHG",
+    "Hour_sin",
+    "Hour_cos",
+    "DOW_sin",
+    "DOW_cos",
+    "Month_sin",
+    "Month_cos",
+    "DayOfYear_sin",
+    "DayOfYear_cos",
+    "WindDirection_sin",
+    "WindDirection_cos",
+    "Temperature_sq",
+    "CDD18",
+    "HDD18"
+  ],
+  "selected_features": [
+    "Month_cos",
+    "DayOfYear_cos",
+    "Temperature",
+    "Temperature_sq",
+    "CDD18",
+    "Precipitable Water",
+    "Dew Point",
+    "HDD18",
+    "DayOfYear_sin"
+  ],
+  "model_columns": [
+    "KW",
+    "CHWTON",
+    "HTmmBTU",
+    "Month_cos",
+    "DayOfYear_cos",
+    "Temperature",
+    "Temperature_sq",
+    "CDD18",
+    "Precipitable Water",
+    "Dew Point",
+    "HDD18",
+    "DayOfYear_sin"
+  ],
+  "model_input_dim": 12,
+  "sentinel_abs_limit": 100000000.0,
+  "physical_bounds": {
+    "KW": [
+      0.0,
+      null
+    ],
+    "CHWTON": [
+      0.0,
+      null
+    ],
+    "HTmmBTU": [
+      0.0,
+      null
+    ],
+    "Temperature": [
+      -273.15,
+      null
+    ],
+    "Dew Point": [
+      -273.15,
+      null
+    ],
+    "Relative Humidity": [
+      0.0,
+      100.0
+    ],
+    "Solar Zenith Angle": [
+      0.0,
+      180.0
+    ],
+    "Surface Albedo": [
+      0.0,
+      1.0
+    ],
+    "Pressure": [
+      0.0,
+      null
+    ],
+    "Precipitable Water": [
+      0.0,
+      null
+    ],
+    "Wind Direction": [
+      0.0,
+      360.0
+    ],
+    "Wind Speed": [
+      0.0,
+      null
+    ],
+    "GHG": [
+      0.0,
+      null
+    ]
+  },
+  "sentinel_or_nonfinite_counts": {
+    "DOW": 0,
+    "KW": 89,
+    "CHWTON": 0,
+    "HTmmBTU": 8,
+    "Temperature": 0,
+    "Dew Point": 0,
+    "Relative Humidity": 0,
+    "Solar Zenith Angle": 0,
+    "Surface Albedo": 0,
+    "Pressure": 0,
+    "Precipitable Water": 0,
+    "Wind Direction": 0,
+    "Wind Speed": 0,
+    "GHG": 403,
+    "Combined mmBTU": 97
+  },
+  "iqr_diagnostic_factor": 1.5,
+  "source_quality_flags": {
+    "source": null,
+    "columns": {},
+    "available": false,
+    "invalid_counts": {},
+    "mapping_sha256": null
+  },
+  "cleaning": {
+    "rule": "labels and inputs reject non-finite/parser failures, explicit sentinels, source quality failures, and pre-registered physical-bound violations; training-only Q1 +/- 1.5*IQR bounds are diagnostic only and remove no rows; the v7 robust target envelope additionally rejects target values above max(1, 10 * train median abs)",
+    "algorithm": "hard_validity_plus_robust_target_envelope_v7",
+    "iqr_factor": 1.5,
+    "iqr_role": "training_fitted_diagnostic_only",
+    "iqr_invalidates_labels": false,
+    "iqr_alters_model_input": false,
+    "target_envelope_enabled": true,
+    "target_envelope_factor": 10.0,
+    "target_envelope_floor": 1.0,
+    "target_envelope_scope": [
+      "KW",
+      "CHWTON",
+      "HTmmBTU"
+    ],
+    "target_envelope_fitted_on": "training split only",
+    "target_envelope_statistic": "median (50% breakdown point) of absolute hard-valid training targets",
+    "target_envelope_rules": {
+      "KW": {
+        "fit_valid_count": 20893,
+        "median_abs": 16499.25,
+        "mean_abs": 17527.869685540612,
+        "max_abs": 577201.14,
+        "factor": 10.0,
+        "floor": 1.0,
+        "threshold": 164992.5,
+        "max_to_median_ratio": 34.98347743079231
+      },
+      "CHWTON": {
+        "fit_valid_count": 21008,
+        "median_abs": 20332.146285000003,
+        "mean_abs": 23437.178347362435,
+        "max_abs": 1464683.173,
+        "factor": 10.0,
+        "floor": 1.0,
+        "threshold": 203321.46285,
+        "max_to_median_ratio": 72.03780419780703
+      },
+      "HTmmBTU": {
+        "fit_valid_count": 21000,
+        "median_abs": 1655.45,
+        "mean_abs": 2179.555563809524,
+        "max_abs": 7002682.42,
+        "factor": 10.0,
+        "floor": 1.0,
+        "threshold": 16554.5,
+        "max_to_median_ratio": 4230.077876106195
+      }
+    },
+    "fitted_on": "training split only",
+    "state_carry": "not_applicable_no_regime_state_machine",
+    "retroactive_changes": false,
+    "hard_invalid_recoverable": false,
+    "train": {
+      "KW": {
+        "input_missing_or_nonfinite": 105,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 26,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 20,
+        "iqr_diagnostic_excursion_count": 130,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 130,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 130,
+        "ordinary_retained": 20762,
+        "valid_retained": 20892
+      },
+      "CHWTON": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 2,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21006,
+        "valid_retained": 21006
+      },
+      "HTmmBTU": {
+        "input_missing_or_nonfinite": 24,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 1,
+        "iqr_diagnostic_excursion_count": 201,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 201,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 201,
+        "ordinary_retained": 20798,
+        "valid_retained": 20999
+      },
+      "DOW": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "Temperature": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21008,
+        "valid_retained": 21008
+      },
+      "Dew Point": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 2,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 2,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 2,
+        "ordinary_retained": 21006,
+        "valid_retained": 21008
+      },
+      "Relative Humidity": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 317,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 317,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 317,
+        "ordinary_retained": 20691,
+        "valid_retained": 21008
+      },
+      "Solar Zenith Angle": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21008,
+        "valid_retained": 21008
+      },
+      "Surface Albedo": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21008,
+        "valid_retained": 21008
+      },
+      "Pressure": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 508,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 508,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 508,
+        "ordinary_retained": 20500,
+        "valid_retained": 21008
+      },
+      "Precipitable Water": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 1124,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 1124,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 1124,
+        "ordinary_retained": 19884,
+        "valid_retained": 21008
+      },
+      "Wind Direction": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21008,
+        "valid_retained": 21008
+      },
+      "Wind Speed": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 582,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 582,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 582,
+        "ordinary_retained": 20426,
+        "valid_retained": 21008
+      },
+      "GHG": {
+        "input_missing_or_nonfinite": 418,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 52,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 138,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 138,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 138,
+        "ordinary_retained": 20416,
+        "valid_retained": 20554
+      },
+      "Hour_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "Hour_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "DOW_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "DOW_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "Month_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "Month_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "DayOfYear_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "DayOfYear_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21024,
+        "valid_retained": 21024
+      },
+      "WindDirection_sin": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21008,
+        "valid_retained": 21008
+      },
+      "WindDirection_cos": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21008,
+        "valid_retained": 21008
+      },
+      "Temperature_sq": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 119,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 119,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 119,
+        "ordinary_retained": 20889,
+        "valid_retained": 21008
+      },
+      "CDD18": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 21008,
+        "valid_retained": 21008
+      },
+      "HDD18": {
+        "input_missing_or_nonfinite": 16,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 1504,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 1504,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 1504,
+        "ordinary_retained": 19504,
+        "valid_retained": 21008
+      }
+    },
+    "validation": {
+      "KW": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 983,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 983,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 983,
+        "ordinary_retained": 1645,
+        "valid_retained": 2628
+      },
+      "CHWTON": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "HTmmBTU": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DOW": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Temperature": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Dew Point": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Relative Humidity": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Solar Zenith Angle": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Surface Albedo": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Pressure": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Precipitable Water": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 117,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 117,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 117,
+        "ordinary_retained": 2511,
+        "valid_retained": 2628
+      },
+      "Wind Direction": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Wind Speed": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 72,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 72,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 72,
+        "ordinary_retained": 2556,
+        "valid_retained": 2628
+      },
+      "GHG": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 980,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 980,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 980,
+        "ordinary_retained": 1648,
+        "valid_retained": 2628
+      },
+      "Hour_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Hour_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DOW_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DOW_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Month_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Month_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DayOfYear_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DayOfYear_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "WindDirection_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "WindDirection_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Temperature_sq": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 146,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 146,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 146,
+        "ordinary_retained": 2482,
+        "valid_retained": 2628
+      },
+      "CDD18": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "HDD18": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      }
+    },
+    "test": {
+      "KW": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "CHWTON": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "HTmmBTU": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DOW": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Temperature": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Dew Point": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Relative Humidity": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 25,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 25,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 25,
+        "ordinary_retained": 2603,
+        "valid_retained": 2628
+      },
+      "Solar Zenith Angle": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Surface Albedo": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Pressure": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 79,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 79,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 79,
+        "ordinary_retained": 2549,
+        "valid_retained": 2628
+      },
+      "Precipitable Water": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 1,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 1,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 1,
+        "ordinary_retained": 2627,
+        "valid_retained": 2628
+      },
+      "Wind Direction": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Wind Speed": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 32,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 32,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 32,
+        "ordinary_retained": 2596,
+        "valid_retained": 2628
+      },
+      "GHG": {
+        "input_missing_or_nonfinite": 1,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2627,
+        "valid_retained": 2627
+      },
+      "Hour_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Hour_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DOW_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DOW_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Month_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Month_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DayOfYear_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "DayOfYear_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "WindDirection_sin": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "WindDirection_cos": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "Temperature_sq": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "CDD18": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 0,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 0,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 0,
+        "ordinary_retained": 2628,
+        "valid_retained": 2628
+      },
+      "HDD18": {
+        "input_missing_or_nonfinite": 0,
+        "explicit_sentinel_invalid": 0,
+        "hard_physical_invalid": 0,
+        "source_quality_invalid": 0,
+        "target_envelope_invalid": 0,
+        "iqr_diagnostic_excursion_count": 94,
+        "iqr_removed_count": 0,
+        "soft_excursion_total": 94,
+        "soft_provisional_removed": 0,
+        "soft_confirmed_retained": 94,
+        "ordinary_retained": 2534,
+        "valid_retained": 2628
+      }
+    },
+    "final_state": {
+      "KW": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "CHWTON": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "HTmmBTU": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "DOW": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Temperature": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Dew Point": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Relative Humidity": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Solar Zenith Angle": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Surface Albedo": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Pressure": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Precipitable Water": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Wind Direction": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Wind Speed": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "GHG": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Hour_sin": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Hour_cos": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "DOW_sin": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "DOW_cos": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Month_sin": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Month_cos": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "DayOfYear_sin": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "DayOfYear_cos": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "WindDirection_sin": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "WindDirection_cos": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "Temperature_sq": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "CDD18": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      },
+      "HDD18": {
+        "consecutive_soft_excursions": 0,
+        "excursion_side": 0
+      }
+    }
+  },
+  "zero_target_policy": "keep",
+  "zero_target_interpretation": "physically valid and retained; counts are diagnostic only",
+  "zero_target_counts": {
+    "train": {
+      "KW": 1,
+      "CHWTON": 14,
+      "HTmmBTU": 1
+    },
+    "validation": {
+      "KW": 0,
+      "CHWTON": 0,
+      "HTmmBTU": 0
+    },
+    "test": {
+      "KW": 0,
+      "CHWTON": 0,
+      "HTmmBTU": 0
+    }
+  },
+  "imputation": {
+    "missing_before": {
+      "KW": 132,
+      "CHWTON": 18,
+      "HTmmBTU": 25,
+      "DOW": 0,
+      "Temperature": 16,
+      "Dew Point": 16,
+      "Relative Humidity": 16,
+      "Solar Zenith Angle": 16,
+      "Surface Albedo": 16,
+      "Pressure": 16,
+      "Precipitable Water": 16,
+      "Wind Direction": 16,
+      "Wind Speed": 16,
+      "GHG": 471,
+      "Hour_sin": 0,
+      "Hour_cos": 0,
+      "DOW_sin": 0,
+      "DOW_cos": 0,
+      "Month_sin": 0,
+      "Month_cos": 0,
+      "DayOfYear_sin": 0,
+      "DayOfYear_cos": 0,
+      "WindDirection_sin": 16,
+      "WindDirection_cos": 16,
+      "Temperature_sq": 16,
+      "CDD18": 16,
+      "HDD18": 16
+    },
+    "missing_after": {
+      "KW": 0,
+      "CHWTON": 0,
+      "HTmmBTU": 0,
+      "DOW": 0,
+      "Temperature": 0,
+      "Dew Point": 0,
+      "Relative Humidity": 0,
+      "Solar Zenith Angle": 0,
+      "Surface Albedo": 0,
+      "Pressure": 0,
+      "Precipitable Water": 0,
+      "Wind Direction": 0,
+      "Wind Speed": 0,
+      "GHG": 0,
+      "Hour_sin": 0,
+      "Hour_cos": 0,
+      "DOW_sin": 0,
+      "DOW_cos": 0,
+      "Month_sin": 0,
+      "Month_cos": 0,
+      "DayOfYear_sin": 0,
+      "DayOfYear_cos": 0,
+      "WindDirection_sin": 0,
+      "WindDirection_cos": 0,
+      "Temperature_sq": 0,
+      "CDD18": 0,
+      "HDD18": 0
+    },
+    "policy": "causal forward fill in chronological order; leading gaps use the training-fitted median",
+    "fit_split": "training split only",
+    "apply_splits": [
+      "training",
+      "validation",
+      "test"
+    ],
+    "train": "causal forward fill, then training median for leading gaps",
+    "validation_test": "causal forward fill seeded by the preceding split state, then training median"
+  },
+  "label_validity": {
+    "definition": "1 iff the raw target value is finite and passes all pre-registered quality rules; 0 otherwise",
+    "quality_rules": [
+      "finite_numeric",
+      "explicit_sentinel_abs_below_limit",
+      "physical_bounds",
+      "declared_source_quality_flags_if_present",
+      "robust_target_envelope"
+    ],
+    "iqr_affects_validity": false,
+    "zero_affects_validity": false,
+    "target_envelope_affects_validity": true,
+    "per_split_valid_counts": {
+      "train": {
+        "KW": 20892,
+        "CHWTON": 21006,
+        "HTmmBTU": 20999
+      },
+      "validation": {
+        "KW": 2628,
+        "CHWTON": 2628,
+        "HTmmBTU": 2628
+      },
+      "test": {
+        "KW": 2628,
+        "CHWTON": 2628,
+        "HTmmBTU": 2628
+      }
+    },
+    "per_split_invalid_counts": {
+      "train": {
+        "KW": 132,
+        "CHWTON": 18,
+        "HTmmBTU": 25
+      },
+      "validation": {
+        "KW": 0,
+        "CHWTON": 0,
+        "HTmmBTU": 0
+      },
+      "test": {
+        "KW": 0,
+        "CHWTON": 0,
+        "HTmmBTU": 0
+      }
+    },
+    "evaluation_policy": "never impute validation/test labels; mask invalid target steps in loss and metrics"
+  },
+  "feature_screening": {
+    "source": "assets/correlation_merged_data21-23/README.md",
+    "threshold": 0.2,
+    "score": "mean of absolute Pearson and Spearman correlations across the three targets",
+    "selection": "top 9 ranked auxiliary features passing the training-only threshold after excluding targets and Combined mmBTU",
+    "correlation_file": "train_correlations.csv"
+  },
+  "feature_availability": {
+    "forecast_origin_rule": "every model input is observed at or before the forecast origin",
+    "future_covariates_used": false,
+    "GHG": "historical observations only; no future GHG value or target-derived Combined mmBTU is used",
+    "timestamp_features": "deterministic calendar features known at the origin",
+    "weather_features": "historical measured weather only; no future weather realization is used"
+  },
+  "zscore": {
+    "fitted_on": "training split only",
+    "target_source": "hard-valid training labels",
+    "parameters": {
+      "KW": {
+        "mean": 17501.080806050166,
+        "std": 5349.555493983403
+      },
+      "CHWTON": {
+        "mean": 23341.000689550125,
+        "std": 13040.61799563945
+      },
+      "HTmmBTU": {
+        "mean": 1846.1824096385542,
+        "std": 740.7456589228208
+      },
+      "Month_cos": {
+        "mean": 0.06196873252377451,
+        "std": 0.6988951257072423
+      },
+      "DayOfYear_cos": {
+        "mean": 0.03955796579425396,
+        "std": 0.6946610362494726
+      },
+      "Temperature": {
+        "mean": 22.14424942922374,
+        "std": 10.197425410637587
+      },
+      "Temperature_sq": {
+        "mean": 594.3552677891934,
+        "std": 476.40636060981075
+      },
+      "CDD18": {
+        "mean": 6.604994292237444,
+        "std": 7.431221275031164
+      },
+      "Precipitable Water": {
+        "mean": 1.7047612252663624,
+        "std": 1.2958977211930436
+      },
+      "Dew Point": {
+        "mean": 2.884760273972603,
+        "std": 8.954502677835974
+      },
+      "HDD18": {
+        "mean": 2.4607448630136988,
+        "std": 4.032123983377149
+      },
+      "DayOfYear_sin": {
+        "mean": 0.11964604459802855,
+        "std": 0.7082132701884908
+      }
+    }
+  },
+  "sequence": {
+    "policy": "csv_sidecars_only_embargo_origins",
+    "npz_written": false,
+    "authorized_inputs": [
+      "dataset_input.csv",
+      "dataset_labels.csv",
+      "label_valid_mask.csv"
+    ],
+    "origin_source": "runner_generated_forecast_origins.csv_using_DataLoaderS_embargo",
+    "horizons": [
+      24,
+      48,
+      72,
+      96
+    ]
+  },
+  "preprocessing_artifact": {
+    "path": "preprocessing_artifact.json",
+    "sha256": "8425f31e62c0d1bee1e42e2d13da2e62490520a53de6ba8e876924ab4f0a942d",
+    "immutable": true
+  },
+  "output_files_sha256": {
+    "dataset_input.csv": "6ff2f3bd18b32356f25aa1e3b5d29a7094ec6c7d7936474ebac628d116da2e91",
+    "dataset_input_zscore.csv": "34d8d3460c54c03ca74c0915cbcc974bb525bfbd5af4251dfa00e9fde4a1f8a8",
+    "dataset_labels.csv": "4a22da20ab27d245de74572ebc47851d7b73d4d00cd9f02ed51bdf5b43599181",
+    "forecast_table.csv": "338ec3fd2630b793e97f360cc8be566b0a8eb78546ae9e9547e8de7fe602d612",
+    "label_valid_mask.csv": "748999f5bd580a8b38f217c791c63aedfec4c74d8c6f3b5c0a9cafe4a6e45051",
+    "preprocessing_artifact.json": "8425f31e62c0d1bee1e42e2d13da2e62490520a53de6ba8e876924ab4f0a942d",
+    "PREPROCESSING_RECORD.md": "78d2a429a61e173752a553db709487c280ecb9b7ba83f439cfa316124bf766c9",
+    "test.csv": "8fdf02fc45556f8ba15f20c7fceb557718d036db0ddcf5ac793f4e8d9c9d4409",
+    "test_label_valid_mask.csv": "715e1d56db0a803b8075ad1ee458de87f30864caa9420233a5a5452f2a207322",
+    "test_labels.csv": "35048eaa706188bd27b489a203729ec6a2086e3cc2e76ec718abdb90c72a7726",
+    "test_labels_input.csv": "35048eaa706188bd27b489a203729ec6a2086e3cc2e76ec718abdb90c72a7726",
+    "test_zscore.csv": "741b95ab99cb119dda78e3f346cff724c65b5b26f0fa8d6c38186bb185fb75eb",
+    "train.csv": "3d35d35b653507ca1703ec357c727bc82232409363afd34edc41a0d9d59a7f2e",
+    "train_correlations.csv": "571268d54873b63e2336873d77870c8e42c71eff2e9a332b8b0bea794f604788",
+    "train_fitted_iqr_bounds.csv": "73e612c42c37ec340f62a49f3963af4e92cc90bf1cc1e7ade1f59c9e70bc4292",
+    "train_label_valid_mask.csv": "5cfc22bdeca827b54ee69447423d3a99f9a2ed57d4cba76072602a8808b3fda7",
+    "train_labels.csv": "5c2a697aee484ab605e1a244ee3a32d04e31e1c9329da39c07acaff818a72142",
+    "train_labels_input.csv": "551fca2d8dc7f5d3d9f9c56b0ba7fed2f128898ff9356bcbccca2c8515fa062f",
+    "train_zscore.csv": "06059fb6e656727248fdef75d53b961235332d640eb8fa846871a1aac5f0c618",
+    "validation.csv": "271f62d71ec15da69121e03c8309ecc57ed1069d30a3cbb6a847b4f4f78d5966",
+    "validation_label_valid_mask.csv": "715e1d56db0a803b8075ad1ee458de87f30864caa9420233a5a5452f2a207322",
+    "validation_labels.csv": "7d0aac3f593fc2ffcebd51c7f275c860a41555f4383c1c92c2a977d48bd86bd5",
+    "validation_labels_input.csv": "7d0aac3f593fc2ffcebd51c7f275c860a41555f4383c1c92c2a977d48bd86bd5",
+    "validation_zscore.csv": "8dbf0d2e0f4f0c86e8e07fb8ed65931545b6430c8af5b625faa26a6f47ad31a1"
+  },
+  "publication": {
+    "immutable_destination": true,
+    "staged_validation_complete": true,
+    "atomic_rename_pending": false
+  }
+}

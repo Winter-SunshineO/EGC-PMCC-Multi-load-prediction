@@ -1,0 +1,31 @@
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.tmp
+.DS_Store
+runs/
+*.pt
+*.pth
+*.pkl
+*.log
+*.npy
+*.npz
+*.xlsx
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+reproduction/
+outputs/
+build/
+dist/
+# Kept locally for preprocessing provenance; upstream raw records are not redistributed.
+data/merged_data21-23.csv
+
+# Historical experiment material is intentionally not part of the public tree.
+reference/
+docs/archive/
